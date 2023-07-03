@@ -15,7 +15,7 @@ This is a simple Todo app built with React Native. It provides a login screen an
    
 2. Navigate to project directory:
    
-   `cd todo-app`
+   `cd Todo_ReactNative`
    
 3. Install dependencies:
    
