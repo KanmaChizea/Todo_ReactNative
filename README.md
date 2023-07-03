@@ -11,7 +11,7 @@ This is a simple Todo app built with React Native. It provides a login screen an
 ## Installation
 1. Clone the repository
    
-   `git clone https://github.com/your-username/todo-app.git`
+   `git clone https://github.com/KanmaChizea/Todo_ReactNative.git`
    
 2. Navigate to project directory:
    
