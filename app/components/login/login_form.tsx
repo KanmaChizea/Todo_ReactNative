@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import Colors from '../../styles/colors';
+import TextStyles from '../../styles/textstyles';
 
 interface CustomTextInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
   secureTextEntry?: boolean;
+  errorMessage?: string;
 }
 
 const InputForm = ({
@@ -16,6 +18,7 @@ const InputForm = ({
   /// hint text
   placeholder,
   secureTextEntry = false,
+  errorMessage,
 }: CustomTextInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -28,9 +31,15 @@ const InputForm = ({
   };
 
   return (
-    <View>
+    <View style={{marginBottom: 24}}>
       <TextInput
-        style={[styles.inputField, isFocused && styles.inputFieldFocused]}
+        style={[
+          styles.inputField,
+          errorMessage != null &&
+            errorMessage.length !== 0 &&
+            styles.inputFieldError,
+          isFocused && styles.inputFieldFocused,
+        ]}
         onChangeText={onChangeText}
         value={value}
         placeholder={placeholder}
@@ -41,6 +50,13 @@ const InputForm = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
+      {errorMessage != null && errorMessage.length !== 0 ? (
+        <Text style={{...TextStyles.caption, color: Colors.red}}>
+          {errorMessage}
+        </Text>
+      ) : (
+        <View />
+      )}
     </View>
   );
 };
@@ -51,7 +67,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    marginBottom: 24,
+
     borderRadius: 12,
     fontSize: 14,
   },
@@ -61,7 +77,16 @@ const styles = StyleSheet.create({
     borderColor: Colors.green,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    marginBottom: 24,
+    borderRadius: 12,
+    fontSize: 14,
+  },
+  inputFieldError: {
+    height: 40,
+    borderWidth: 1.5,
+    borderColor: Colors.red,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 4,
     borderRadius: 12,
     fontSize: 14,
   },

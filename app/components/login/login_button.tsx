@@ -1,13 +1,10 @@
 import React from 'react';
 import Colors from '../../styles/colors';
 import {Dimensions, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {LoginScreenNavigationProp} from '../navigation/navigation_values';
 
-function LoginButton({navigation}: LoginScreenNavigationProp): JSX.Element {
+function LoginButton({onPress}: {onPress: () => void}): JSX.Element {
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => navigation.navigate('Home')}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>Login</Text>
     </TouchableOpacity>
   );

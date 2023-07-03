@@ -25,7 +25,7 @@ function HomeScreen({navigation}: HomeScreenNavigationProp): JSX.Element {
   const [completedList, setCompletedList] = useState<string[]>([]);
 
   function addTodo() {
-    if (todo.length != 0) {
+    if (todo.length !== 0) {
       setActiveList([...activeList, todo]);
       setTodo('');
     } else {

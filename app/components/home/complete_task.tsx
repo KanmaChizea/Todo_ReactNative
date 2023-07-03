@@ -25,7 +25,7 @@ function CompleteTask({
         </TouchableOpacity>
       </View>
       {tasks.map(item => (
-        <View style={styles.listTile}>
+        <View key={tasks.indexOf(item)} style={styles.listTile}>
           <Text style={{...TextStyles.bodySmall, color: Colors.grey2}}>
             {item}
           </Text>

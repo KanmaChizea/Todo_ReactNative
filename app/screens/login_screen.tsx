@@ -19,6 +19,9 @@ function LoginScreen({navigation}: LoginScreenNavigationProp) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isDarkMode = useColorScheme() === 'dark';
+  const [errorName, setErrorName] = useState('');
+  const [errorEmail, setErrorEmail] = useState('');
+  const [errorPassword, setErrorPassword] = useState('');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.foreground : Colors.background,
@@ -38,20 +41,58 @@ function LoginScreen({navigation}: LoginScreenNavigationProp) {
             value={name}
             onChangeText={val => setName(val)}
             placeholder="Name"
+            errorMessage={errorName}
           />
           <InputForm
             value={email}
             onChangeText={val => setEmail(val)}
             placeholder="Email"
+            errorMessage={errorEmail}
           />
           <InputForm
             value={password}
             onChangeText={val => setPassword(val)}
             placeholder="Password"
             secureTextEntry={true}
+            errorMessage={errorPassword}
           />
         </View>
-        <LoginButton navigation={navigation} />
+        <LoginButton
+          onPress={() => {
+            if (
+              email.length === 0 ||
+              name.length === 0 ||
+              password.length < 8 ||
+              password.length === 0
+            ) {
+              if (email.length === 0) {
+                setErrorEmail('Required field');
+              } else {
+                setErrorEmail('');
+              }
+
+              if (name.length === 0) {
+                setErrorName('Required field');
+              } else {
+                setErrorName('');
+              }
+              if (password.length === 0) {
+                setErrorPassword('Required field');
+              } else if (password.length < 8) {
+                setErrorPassword(
+                  'Password should have a minimum of 8 characters',
+                );
+              } else {
+                setErrorPassword('');
+              }
+            } else {
+              setErrorEmail('');
+              setErrorName('');
+              setErrorPassword('');
+              navigation.navigate('Home');
+            }
+          }}
+        />
       </View>
     </SafeAreaView>
   );
